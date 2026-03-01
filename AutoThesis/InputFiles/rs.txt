@@ -1,0 +1,36 @@
+| No. | Title                           | Type of Plot         | Insights                                                                                                                                                |
+| --- | ------------------------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | FocusCNN: Accuracy              | Line Plot            | Training Accuracy: \~96.5%, Validation Accuracy: \~98%. Indicates strong learning and low overfitting.                                                  |
+| 2   | FocusCNN: Loss                  | Line Plot            | Both training and validation losses decreased over 10 epochs, showing smooth convergence.                                                               |
+| 3   | FocusCNN - Confusion Matrix     | Heatmap              | TP (Human): 19427, TP (AI): 19652, FP: 669, FN: 252. Shows high classification precision.                                                               |
+| 4   | FocusCNN - ROC Curve            | Line Plot (ROC)      | AUC = 1.00. Indicates near-perfect discrimination between human and AI text.                                                                            |
+| 5   | AttentionCNN: Accuracy          | Line Plot            | Training Accuracy: \~92%, Validation Accuracy: \~94%. Slight instability, but still high performance.                                                   |
+| 6   | AttentionCNN: Loss              | Line Plot            | Shows spikes in validation loss around epoch 7, suggesting some instability in training.                                                                |
+| 7   | AttentionCNN - Confusion Matrix | Heatmap              | TP (Human): 18986, TP (AI): 18766, FP: 1110, FN: 1138. Model struggles more than others.                                                                |
+| 8   | AttentionCNN - ROC Curve        | Line Plot (ROC)      | AUC = 0.99. Strong performance despite instability.                                                                                                     |
+| 9   | Context RF - Confusion Matrix   | Heatmap              | TP (Human): 19527, TP (AI): 19293, FP: 473, FN: 707. Very high classification accuracy.                                                                 |
+| 10  | Context RF - ROC Curve          | Line Plot (ROC)      | AUC = 1.00. Excellent discrimination power.                                                                                                             |
+| 11  | DisBERT - Confusion Matrix      | Heatmap              | TP (Human): 1956, TP (AI): 1969, FP: 44, FN: 31. Best confusion matrix among all models.                                                                |
+| 12  | DisBERT - ROC Curve             | Line Plot (ROC)      | AUC = 0.9979. Very close to perfect classification.                                                                                                     |
+| 13  | Model Accuracy                  | Line Plot            | DisBERT: 0.9812, FocusCNN: 0.9770, Context RF: 0.9705, AttentionCNN: 0.9438. **(Insight: will be taken from table)**                                    |
+| 14  | Model Metrics Score             | Bar Chart            | DisBERT has the highest scores: Precision (0.9813), Recall (0.9812), F1 Score (0.9812). Others follow in order. **(Insight: will be taken from table)** |
+| 15  | Model Hamming Loss              | Horizontal Bar Chart | Lowest: DisBERT (0.0187), followed by FocusCNN (0.0230), Context RF (0.0295), highest is AttentionCNN (0.0562). **(Insight: will be taken from table)** |
+
+
+**Performance Table for AI vs. Human Text Detection Models**
+
+The table below summarizes the performance metrics for all models evaluated in the `code_AIHUMNA.py` script for detecting AI-generated versus human-generated text. The metrics include Accuracy, Precision, Recall, F1 Score, and Hamming Loss, as extracted from the code. The best-performing model, DisBERT, is highlighted.
+
+| Model          | Accuracy | Precision | Recall | F1 Score | Hamming Loss |
+|----------------|----------|-----------|--------|----------|--------------|
+| FocusCNN       | 0.9770   | 0.9772    | 0.9770 | 0.9770   | 0.0230       |
+| AttentionCNN   | 0.9438   | 0.9438    | 0.9438 | 0.9438   | 0.0562       |
+| Context RF     | 0.9705   | 0.9706    | 0.9705 | 0.9705   | 0.0295       |
+| **DisBERT**    | **0.9812** | **0.9813** | **0.9812** | **0.9812** | **0.0187** |
+
+**Notes**:
+- **DisBERT** is the best-performing model, achieving the highest accuracy (0.9812), precision (0.9813), recall (0.9812), and F1 score (0.9812), with the lowest Hamming loss (0.0187), making it the most effective for distinguishing human and AI-generated text.
+- **FocusCNN** follows closely with strong performance across all metrics (Accuracy: 0.9770, Precision: 0.9772, Recall: 0.9770, F1 Score: 0.9770, Hamming Loss: 0.0230).
+- **Context RF** performs well but is outperformed by DisBERT and FocusCNN.
+- **AttentionCNN** has the lowest performance, with the highest Hamming loss (0.0562) and lowest scores across other metrics (0.9438).
+- Metrics are rounded to four decimal places as per the code, and the table is sourced from the `model_evaluation_results.csv` output in the script.

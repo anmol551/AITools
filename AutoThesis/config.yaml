@@ -1,0 +1,53 @@
+BASE_PAPER_CITATION: Al Bataineh et al., (2025)
+BASE_PAPER_SUMMARY_PATH: InputFiles/bps.txt
+CODE_SUMMARY_PATH: InputFiles/cs.txt
+CODE_SUMMARY_VAL_SPECIFIC_PATH: InputFiles/csvs.txt
+DATA_DETAILS_PATH: InputFiles/dd.txt
+FAILED_ATTEMPT_PATH: INputFiles/fa.txt
+FORMAT: '4'
+KEYWORD_FILE: InputFiles/keywords.txt
+LITERATURE_REVIEW_SUMMARY_PATH: InputFiles/lrs.txt
+METHODOLOGY: OutputFiles/methodology.txt
+NOVELTY_PATH: InputFiles/novelty.txt
+PAPER_CITATION: InputFiles/papers_result.csv
+RESEARCH_GAPS: InputFiles/rg.txt
+RESEARCH_OBJECTIVES: 'The objective for the study are:
+
+  To investigate the effectiveness of deep learning and ensemble-based models in distinguishing
+  between AI-generated and human-generated text within structured datasets.
+
+  To implement advanced text preprocessing techniques, including lowercasing, punctuation
+  removal, contraction expansion, emoji removal, stopword removal, and lemmatization,
+  to enhance feature clarity for text classification.
+
+  To extract semantic features using context-aware embeddings, specifically Sentence
+  Transformers, to capture contextual relationships in text data.
+
+  To develop and compare classification approaches using convolutional neural networks,
+  transformer-based architectures, and ensemble methods for robust AI text detection.
+
+  To evaluate model performance using comprehensive metrics such as accuracy, precision,
+  recall, F1-score, Hamming loss, and visualize results through confusion matrices
+  and ROC curves.
+
+  To develop a web application that enables real-time AI text detection, leveraging
+  the trained classification models for practical and accessible use in academic or
+  industry settings.
+
+  '
+RESEARCH_QUESTION: 'The research questions are:
+
+  How can context-aware embeddings and deep learning techniques enhance the classification
+  accuracy of AI-generated versus human-generated text in structured datasets?
+
+  What is the impact of advanced text preprocessing and context-aware embedding strategies
+  on improving the performance of AI text detection systems, particularly in reducing
+  misclassifications?
+
+  '
+RESEARCH_QUESTION_OBJECTIVES: InputFiles/rqo.txt
+RESULT_SUMMARY_PATH: InputFiles/rs.txt
+TITLE: Detection of AI Generated Text Using Deep and Context Aware Learning techniques
+WEB_APP_DEVELOPMENT: InputFiles/wad.txt
+WEB_APP_SUMMARY_PATH: InputFiles/ws.txt
+WEB_APP_TESTING_RESULTS: InputFiles/wat.txt

@@ -1,0 +1,88 @@
+IMPLEMENTATION
+------------------------
+1. IMPLEMENTATION
+----------------------------------------
+### Implementation
+
+#### Data Characteristics for AI vs. Human Text Detection
+This section outlines the key traits of the dataset used for distinguishing AI-generated and human-written text. The dataset comprises 487235 records with varied data types including text and numerical features. Summary statistics reveal a mean word count of 393.1 and a median of 363. The mean number of sentences stands at 20.8. Average word length is 4.76 characters while punctuation marks average at 48.1 per entry. Standard deviation for word count is notable at 186.2. Minimum word count is 1 and maximum reaches 1750. Quartiles for word count are 246 at 25%, 363 at 50%, and 493 at 75%, showing the spread of text lengths across the dataset.
+
+#### Visual Exploration of Textual Patterns
+Building on the dataset traits, this section delves into visual analysis to uncover patterns in AI and human text. Various plots were crafted to examine distributions and relationships within the data, offering insights into structural and thematic differences.
+
+A clear imbalance emerges from a pie chart showing the distribution of text sources. Human-generated content accounts for 62.8% of the dataset while AI-generated text constitutes 37.2%. This disparity, as visualised in Figure 4.1, suggests a need for balancing techniques to ensure fair model training. Such an imbalance could skew predictions if not addressed, potentially leading to bias towards the majority class. Understanding this split is vital for subsequent steps in preparing the data for analysis.
+
+Word clouds provide a glimpse into frequent terms used across both categories as seen in Figure 4.2. Human text often includes words like school, car, students, and people, hinting at common, relatable topics. In contrast, AI text prioritises terms such as students, college, and electoral, pointing to more formal or academic themes. Shared words like people exist, yet distinct terms reveal unique focuses, with car in human text and electoral in AI text showing thematic divergence.
+
+Examining word count distribution through a histogram, a peak appears at around 350 words with a frequency of roughly 7500 as depicted in Figure 4.3. The distribution shows a right skew with a tail extending to 1750 words. This indicates that while most texts are relatively short, a small number are considerably longer. Such variation in length could influence how models interpret text complexity and structure during classification tasks.
+
+Sentence count distribution, captured in another histogram in Figure 4.4, reveals a sharp peak at about 12 sentences with a frequency near 25000. Most texts contain fewer than 50 sentences, though some rare instances exceed 200. This high skew suggests diverse text complexity within the dataset. Models might need to account for this variability to avoid misinterpreting longer or shorter texts based solely on sentence structure.
+
+A scatter plot exploring the link between word count and text length, as shown in Figure 4.5, displays a strong positive trend up to 1500 words and 8000 characters. Outliers appear at around 300 words with text lengths above 17500 characters. This could point to formatting anomalies or data issues that may need cleaning. Such patterns help in understanding how raw text length correlates with processed word counts in both AI and human texts.
+
+Average word length distribution is illustrated in a histogram seen in Figure 4.6. A sharp peak occurs at approximately 5 characters with a frequency exceeding 7000. Most texts fall between 0 and 10 characters per word, indicating uniformity in word length. Rare cases of longer words exist, which might reflect specific stylistic choices or errors in data collection, offering a clue into textual nuances between the two categories.
+
+Punctuation usage, examined through a boxen plot in Figure 4.7, shows a median of about 25 marks per text. Most entries range between 10 and 60 marks, with a positive skew and an outlier near 400. This variation suggests differing styles or complexity in text composition. Such insights are useful for understanding how punctuation might serve as a distinguishing factor in text classification.
+
+Another scatter plot, as presented in Figure 4.8, maps average word length against the number of unique words. Most data points lie within 0 to 10 characters for average word length and 0 to 650 for unique words. Outliers exist at 65 and 125 characters with almost zero unique words, hinting at potential data errors. This visual helps in spotting irregularities that could impact model training if not addressed.
+
+Bigrams frequency, visualised in a horizontal bar plot in Figure 4.9, highlights key phrase patterns. Electoral college tops the list with 269048 occurrences in human text and 178684 in AI text. Human text often uses driverless cars at 91579 while AI text focuses on car usage at 103114. These shared and distinct phrases underline common themes like civic and automotive topics, yet with varied emphasis between the sources.
+
+Trigram patterns, shown in another horizontal bar plot in Figure 4.10, mirror bigram trends. Electoral college remains dominant across both categories, suggesting consistent thematic focus in longer phrase structures. This visual, as captured in Figure 4.10, reinforces the idea that certain topics persist across different n-gram analyses, providing deeper insight into content differences and similarities between AI and human-generated texts.
+
+#### Text Data Preparation
+This section details the steps taken to prepare the dataset for distinguishing AI and human text through various cleaning and transformation methods.
+
+##### Text Cleaning
+Initial cleaning involved converting all text to lowercase and removing punctuation marks to ensure uniformity. This process targeted non-word and non-space characters, replacing them with empty strings. Such steps were crucial to eliminate noise that could affect analysis. Tokenisation followed, breaking down text into individual words using standard natural language processing tools. This allowed for a granular examination of content.
+
+Stopwords were filtered out from the tokenised data to focus on meaningful terms. This reduced the dataset size without losing critical information. The cleaned text provided a clearer base for subsequent feature creation and model training, ensuring that irrelevant elements did not skew the results. These efforts streamlined the data for effective pattern recognition.
+
+##### Data Type Conversion
+Ensuring consistent data types was a key step in preparation. The target column indicating text origin was converted to an integer format to align with model requirements. This transformation was applied across all records to avoid mismatches during processing. Such consistency proved essential for seamless integration with analytical tools.
+
+This conversion eliminated potential errors in data handling, maintaining integrity throughout the pipeline. Each record was checked to confirm the correct format, supporting accurate categorisation. By standardising data types, the groundwork was laid for reliable feature extraction and model input, contributing to the overall quality of the analysis.
+
+##### Feature Creation and Selection
+Feature creation enriched the dataset by quantifying textual attributes to aid in distinguishing between AI and human content. Several metrics were derived from the raw text, including text length as total characters, word count as the number of words, and sentence count by tallying specific punctuation marks. Average word length was computed by dividing total characters by word count, defaulting to 1 if no words were present. Unique word count captured distinct terms after converting to lowercase.
+
+Further features included counting fully uppercase words, digit characters, and punctuation marks per entry. These eight engineered features, alongside original text and origin labels, expanded the dataset's depth. This process, applied across all 487235 records, aimed to capture stylistic and structural differences. By quantifying such traits, the dataset became more informative for models to detect subtle variations. Each feature was calculated systematically, ensuring no data was overlooked. These additions provided a comprehensive view, supporting better differentiation during model training.
+
+#### Model Development for Text Classification
+This section introduces the approach to building models for classifying text as AI or human-generated.
+
+##### DistilBERT Implementation
+DistilBERT was trained as a primary classifier for text detection. This transformer-based model used a pre-trained base named distilbert-base-uncased with settings adjusted for two output labels. Parameters included a batch size of 32, training for 1 epoch, and a learning rate of 2e-5. Output attentions and hidden states were disabled to optimise computation. The model ran on available hardware, either GPU or CPU, with an AdamW optimiser and epsilon set at 1e-8.
+
+A linear learning rate scheduler with zero warmup steps was integrated to adjust training pace. Gradient clipping capped at 1.0 prevented exploding gradients during backpropagation. Each training epoch involved a forward pass, loss calculation, and optimisation steps. The fine-tuned model was saved based on validation performance, ensuring it captured contextual patterns effectively for distinguishing text sources.
+
+##### FocusCNN Implementation
+FocusCNN was developed as a convolutional neural network for text classification. This architecture focused on capturing local patterns within text data through convolutional layers. Key parameters included kernel sizes for feature extraction and pooling layers to reduce dimensionality. Dense layers were added for final classification into two categories. The model was trained over multiple epochs with a batch size suited to hardware constraints, ensuring efficient processing of the large dataset.
+
+Dropout layers were incorporated to prevent overfitting during training. The optimiser used was standard for deep learning tasks with a learning rate adjusted for stable convergence. Data was fed in batches, allowing the model to learn from sequential patterns in text. This setup aimed to detect structural differences between AI and human content, focusing on specific textual features for accurate categorisation.
+
+##### AttentionCNN Implementation
+AttentionCNN combined convolutional layers with attention mechanisms to prioritise relevant text segments. This model was built using a deep learning framework with layers designed to focus on contextual importance. Parameters included attention heads to weigh different parts of the input and convolutional filters for feature extraction. Batch size and epoch count were set to balance training time and performance on the dataset.
+
+Training involved optimising loss through a suitable algorithm with a learning rate fine-tuned for gradual improvement. Pooling and normalisation layers ensured manageable data dimensions and stable gradients. This approach aimed to capture both local and global text patterns, enhancing the model's ability to differentiate between text origins. The structure was tested iteratively to refine its focus on key textual cues.
+
+##### Context RF Implementation
+Context RF was implemented as a traditional machine learning classifier for text categorisation. This random forest model was trained on engineered features derived from text data. Core parameters included the number of trees and depth limits to control complexity. Feature importance was inherently calculated to identify key predictors. The model processed data in batches to handle the large volume of records efficiently.
+
+Training focused on minimising classification errors through ensemble techniques. Random sampling of features at each split ensured diversity in decision paths. The setup was straightforward, requiring minimal hyperparameter tuning compared to neural networks. This model aimed to provide a baseline for comparison, capturing statistical patterns in textual features to distinguish between AI and human-generated content effectively.
+
+#### Explainable AI Approach
+An explainable AI framework was integrated to interpret model decisions for text classification, focusing on DistilBERT as the primary model due to its superior performance. The method aimed to highlight which text segments influenced predictions most. Implementation involved post-hoc analysis tools to map input features to output labels, using attention weights inherent in the transformer architecture. No additional parameters were introduced beyond those used in model training.
+
+The process extracted attention scores across layers, aggregating them to identify key tokens driving classification. This was applied to sample predictions across both AI and human text categories. Visualisations were generated to map these influences, aiding in understanding decision rationale. The approach was tested on validation data to ensure consistency, providing clarity on how specific words or phrases swayed the model towards a particular class during evaluation.
+
+#### Web Interface Development
+A web interface was crafted to enable users to classify text as AI or human-generated. Development used a Python-based framework with styling components for a modern look. The setup included a text input area with a placeholder for guidance and a submission button for analysis. The interface featured a gradient title and descriptive text to orient users on its purpose, ensuring ease of navigation.
+
+Text processing involved multiple cleaning stages, converting input to lowercase, removing punctuation, expanding contractions, and handling special characters. Semantic embeddings were generated using a pre-trained encoder to transform text into numerical form for classification. Results were displayed with confidence levels and visual bars to indicate prediction strength. Confidence thresholds categorised outputs as high or moderate, enhancing user trust. This platform was tested iteratively to refine user experience, focusing on seamless interaction and clear feedback delivery.
+
+#### Obstacles and Resolutions
+During the project on AI versus human text detection, several hurdles emerged, yet solutions were devised to address them. Handling the large dataset of 487235 records posed memory constraints, often slowing down processing. Optimising data loading in chunks mitigated this, ensuring smoother operations. Balancing the class distribution, with human text at 62.8% and AI at 37.2%, was another challenge. Sampling techniques were applied to even out representation, improving model fairness.
+
+As per research by Mishra et al. (2020), text preprocessing inconsistencies can impact outcomes, which was observed with varied text formats. Standardising cleaning steps countered this issue effectively. Another concern was model interpretability, especially with complex architectures. According to Çetin and Yıldız (2022), transparent methods aid trust, so explainable tools were integrated to clarify decisions. These solutions maintained project progress, addressing technical barriers with practical adjustments.
+
