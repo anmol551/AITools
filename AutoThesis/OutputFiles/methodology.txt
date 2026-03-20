@@ -1,0 +1,170 @@
+METHODOLOGY
+------------------------
+1. METHODOLOGY
+----------------------------------------
+### Methodology
+
+#### 1. Research Design for Financial Risk Prediction
+
+This research outlines a detailed pipeline for assessing financial risk in loan approval scenarios using a synthetic dataset. The process begins with data collection from an online repository followed by thorough exploration to understand the dataset's structure and patterns. Key stages include cleaning and transforming data, selecting relevant attributes, and creating new variables to improve model performance. The pipeline then moves to building predictive models, evaluating their outputs, and comparing their effectiveness for risk score estimation and loan approval decisions. Three distinct approaches are explored: a linear regression method, a convolutional neural network, and an attention-based tabular learning model.
+
+Subsequent steps involve integrating an advanced language model for generating detailed reports and developing a web-based platform named Streamlit for real-time risk assessment. The pipeline concludes with testing the application across various applicant profiles to ensure practical usability. This comprehensive design aims to balance technical precision with actionable decision-making in financial contexts.
+
+#### 2. Dataset Description for Loan Risk Analysis
+
+The dataset used in this study is a synthetic collection focused on financial risk for loan approval, sourced from Kaggle (https://www.kaggle.com/datasets/lorenzozoppelletto/financial-risk-for-loan-approval/data). It contains 20,000 records with 37 attributes covering diverse applicant details. This large volume of data provides a solid foundation for building reliable predictive models.
+
+The choice of this dataset stems from its comprehensive nature, capturing a wide range of financial and personal factors relevant to loan risk assessment. Its synthetic origin allows for experimentation without privacy concerns, making it suitable for academic exploration.
+
+Ethically, using artificial data avoids risks associated with real personal information. It also ensures that biases in real-world data are not replicated during model training. The dataset shows a notable imbalance in approval outcomes, which poses challenges for analysis. Key representations include numerical indicators of financial health, categorical descriptors of personal status, and target variables for both continuous risk scores and binary approval decisions.
+
+#### 3. Data Preprocessing for Loan Risk Modelling
+
+This section details the steps taken to prepare the dataset for accurate risk prediction.
+
+##### 3.1 Data Loading and Initial Checks
+
+Loading the dataset is the first step to ensure all records are accessible for analysis. This process is vital as it sets the stage for subsequent exploration and modelling by confirming data integrity. A synthetic dataset with 20,000 entries was chosen to provide a broad base for analysis. Checking the dataset's structure, missing entries, and duplicates helps maintain quality. Visual tools like charts and graphs were used to understand variable distributions and relationships. [EQ_1: representation of data structure check]. As noted by Dumitrescu et al. (2022), early identification of data issues can significantly improve model outcomes.
+
+Understanding the nature of variables is equally important. Distinguishing between numerical and categorical types allows for appropriate handling in later stages. This initial assessment ensures that no critical information is overlooked, paving the way for effective data transformation and cleaning processes.
+
+##### 3.2 Categorical Variable Encoding
+
+Encoding categorical variables transforms non-numerical data into a format suitable for modelling. This step is essential in financial risk analysis as many applicant details are descriptive rather than numerical. It improves the model's ability to interpret such information. Two encoding methods were applied based on variable characteristics. [EQ_2: encoding transformation process]. According to Mestiri (2024), proper encoding prevents loss of meaningful data during conversion.
+
+The process targets specific attributes like employment and marital status to ensure comprehensive representation. This transformation maintains the integrity of original data while enabling compatibility with predictive algorithms. Correct handling of these variables directly impacts the accuracy of risk predictions and approval decisions.
+
+##### 3.3 Removal of Unnecessary Attributes
+
+Removing irrelevant attributes focuses the analysis on meaningful data points. In loan risk modelling, some details do not contribute to predictive power and can introduce noise. Dropping such elements streamlines the dataset for better performance. [EQ_3: attribute removal criterion]. As highlighted by Jemai and Zarrad (2023), eliminating non-informative data enhances model efficiency.
+
+This step ensures that only relevant information influences the outcome. Careful consideration prevents the accidental removal of useful variables. The process refines the dataset, making it more manageable and aligned with the goals of risk assessment.
+
+#### 4. Feature Selection for Risk Prediction
+
+Feature selection plays a critical role in refining the dataset for loan risk analysis. It aims to identify the most impactful variables that contribute to accurate predictions while reducing complexity. This approach is particularly useful in financial contexts where numerous factors can obscure key insights. By narrowing down to essential attributes, the process improves model focus and reduces computational demands.
+
+The method applied here uses a recursive elimination strategy with a random forest-based estimator to select ten significant variables. Correlation analysis and visual representations like heatmaps aided in understanding relationships and importance. [EQ_4: feature selection ranking process]. As stated by Li et al. (2024), selecting relevant features can markedly improve predictive accuracy in credit risk scenarios. This step ensures that only the most meaningful data points drive the modelling process.
+
+#### 5. Feature Engineering for Enhanced Risk Insights
+
+Feature engineering involves creating new variables to capture underlying patterns in financial risk data. This step is vital for loan approval modelling as it uncovers relationships not immediately apparent in raw data. It allows models to better interpret complex financial behaviours and applicant profiles, thus improving prediction quality.
+
+Six new variables were constructed to reflect aspects like income consistency and debt burden. Each was designed to address specific risk dimensions, calculated through defined expressions. [EQ_5: income consistency ratio]; [EQ_6: net worth relative to income]; [EQ_7: debt burden indicator]; [EQ_8: credit history impact]; [EQ_9: past risk marker]; [EQ_10: combined risk measure]. According to Belhadi et al. (2024), engineered features can significantly boost model performance in financial assessments. These additions enrich the dataset, providing deeper insights for subsequent analysis.
+
+#### 6. Class Balancing Exploration
+
+Class balancing addresses disparities in outcome distribution within the dataset, a common challenge in loan approval scenarios. Imbalanced data can skew model predictions towards the majority class, reducing fairness in risk assessment. Exploring balancing techniques ensures that models do not overlook minority outcomes, which is crucial for equitable decision-making in financial contexts.
+
+An oversampling method was considered to adjust the distribution of approval outcomes. However, due to the regression focus of this study, the approach was not implemented. The exploration was documented for potential future classification tasks. [EQ_11: oversampling adjustment process]. As suggested by Prabhakaran and Nedunchelian (2024), balancing strategies are often necessary to achieve unbiased results in imbalanced datasets. This step highlights the importance of considering data distribution even if not applied.
+
+#### 7. Data Scaling for Model Compatibility
+
+Scaling adjusts numerical variables to a common range, ensuring fair contribution to model predictions. In financial risk analysis, variables often vary widely in magnitude, which can distort model learning. This process is essential to prevent any single attribute from dominating due to its scale, thus promoting balanced analysis.
+
+A standard scaling technique was applied to thirteen continuous variables to normalise their distributions. The resulting scaler was saved for consistent application in deployment. [EQ_12: scaling transformation formula]. According to Hossain and Mia (2024), scaling is a critical step to ensure model stability across diverse data ranges. This preparation allows for smoother training and more reliable risk score outputs in later stages.
+
+#### 8. Train-Test Data Split
+
+Splitting the dataset into training and testing subsets is a fundamental step in model development. This ensures that models are evaluated on unseen data, reflecting real-world applicability in loan risk prediction. A balanced split prevents overfitting and provides a true measure of performance for financial decision-making.
+
+An 80% training and 20% testing division was adopted, resulting in 16,000 and 4,000 records respectively. A fixed seed value ensures reproducibility of the split across experiments. [EQ_13: data split proportion]. As noted by Sarkar et al. (2024), a well-proportioned split is key to validating model generalisation in credit risk tasks. This division supports robust training and fair evaluation of predictive capabilities.
+
+#### 9. Model Building for Risk Score Prediction
+
+This section outlines the development of predictive models for financial risk assessment.
+
+##### 9.1 ElasticNet Regression Model
+
+ElasticNet regression is a linear approach combining two regularisation techniques to predict continuous risk scores. This model was selected for loan risk analysis due to its ability to handle high-dimensional data while preventing overfitting. Its simplicity makes it an ideal baseline for comparison with more complex architectures. In financial contexts, where interpretability matters, this method offers clarity in understanding variable impacts on risk outcomes.
+
+The model operates by balancing penalty terms to control complexity, with parameters set for maximum iterations and a fixed seed for consistency. A search method optimised its hyperparameters to improve performance. [EQ_14: regularisation balance expression]; [EQ_15: objective minimisation function]. According to Mazur (2025), such linear models provide a strong foundation for financial predictions due to their straightforward mechanics. This approach ensures a reliable starting point for risk estimation.
+
+##### 9.2 Convolutional Neural Network (CNN) Regressor
+
+A 1D Convolutional Neural Network was chosen for its strength in capturing local patterns within sequential or structured data. In loan risk prediction, this model excels at identifying subtle relationships among financial variables over traditional methods. Its layered structure suits the complexity of risk score estimation, making it a valuable tool for deeper analysis in this domain.
+
+The architecture processes input through multiple stages, with specific settings for filters, kernel sizes, and activation functions. Training parameters include a defined number of cycles and batch sizes. [EQ_16: convolution operation]; [EQ_17: loss optimisation expression]. As per Akyüz and Güler (2025), convolutional networks can uncover hidden patterns in financial datasets effectively. This model adds depth to the predictive framework used in this study.
+
+###### 9.2.1 Conv1D Layer
+
+The Conv1D layer is a core component of the CNN architecture, designed to extract local features from input data. In the context of loan risk prediction, it helps detect patterns across financial attributes that might indicate risk levels. This layer focuses on small segments of data to build a hierarchical understanding.
+
+It operates by sliding a filter over the input to compute feature maps, with defined filter counts and kernel sizes for each instance. The activation function introduces non-linearity to capture complex relationships. [EQ_18: feature map computation]. This mechanism ensures that relevant financial indicators are prioritised, contributing to accurate risk score predictions within the broader network structure.
+
+###### 9.2.2 Batch Normalisation Layer
+
+Batch Normalisation stabilises training by normalising layer inputs across mini-batches. Within this CNN for loan risk analysis, it reduces internal covariate shift, speeding up convergence. This layer ensures consistent performance across diverse financial data inputs, enhancing model stability.
+
+It adjusts mean and variance during training, applying scaling and shifting parameters to maintain data distribution. This process mitigates issues arising from varying data scales. [EQ_19: normalisation adjustment formula]. By maintaining a steady flow of information, this layer supports effective learning of risk patterns, ensuring the network adapts smoothly to the dataset's characteristics.
+
+###### 9.2.3 Flatten Layer
+
+The Flatten layer reshapes multi-dimensional data into a single vector for further processing. In this CNN for financial risk prediction, it connects convolutional outputs to dense layers, enabling comprehensive risk assessment. This transformation is crucial for integrating learned features into final predictions.
+
+It works by collapsing spatial dimensions while preserving all extracted information, ensuring no data loss. The process is straightforward but essential for downstream compatibility. [EQ_20: dimension reshaping process]. This step ensures that complex patterns identified earlier are effectively translated into a format suitable for risk score computation within the network.
+
+###### 9.2.4 Dense Layer
+
+The Dense layer performs high-level reasoning by connecting all inputs to outputs via weighted computations. In loan risk modelling, it synthesises features extracted by prior layers into a cohesive risk score. This layer is key to producing meaningful predictions from processed financial data.
+
+It applies weights and biases to input values, followed by an activation function to introduce non-linearity. Specific neuron counts define its capacity for each instance. [EQ_21: weighted sum computation]. This mechanism allows the model to weigh the importance of various financial factors, ensuring accurate risk estimation as part of the broader architecture.
+
+###### 9.2.5 Dropout Layer
+
+Dropout randomly deactivates a fraction of neurons during training to prevent overfitting. In this CNN for financial risk analysis, it promotes generalisation by reducing reliance on specific features. This layer ensures the model remains adaptable to unseen applicant data.
+
+It operates by setting a dropout rate, effectively ignoring selected units in each training pass. This randomness enhances model resilience across diverse inputs. [EQ_22: random deactivation proportion]. By introducing variability, this layer helps maintain prediction reliability, ensuring the network does not overfit to training data patterns in risk assessment tasks.
+
+##### 9.3 TabNet Regressor
+
+TabNet is an attention-based architecture designed for tabular data, making it ideal for loan risk prediction. Its ability to focus on relevant features while maintaining interpretability aligns with the needs of financial decision-making. This model was chosen for its advanced handling of structured data, offering superior performance over traditional methods in this specific context.
+
+It employs a sequential attention mechanism to select important variables at each step, with defined parameters for feature dimensions and sparsity. Training settings include maximum cycles and early stopping criteria. [EQ_23: attention selection process]; [EQ_24: sparsity control expression]. According to Arik and Pfister (2021), such architectures excel in financial tasks by prioritising impactful data. This model provides a sophisticated approach to risk score estimation.
+
+#### 10. Model Performance Evaluation Metrics
+
+This section defines the metrics used to assess model performance in financial risk prediction. Each metric provides unique insights into prediction quality for loan approval scenarios.
+
+Mean Absolute Error measures the average magnitude of prediction errors, reflecting accuracy in risk score estimation. It is vital for understanding how close predictions are to actual values in financial contexts. [EQ_25: average error calculation].
+
+Mean Squared Error quantifies the average squared difference between predicted and actual scores, penalising larger errors more heavily. It highlights model consistency in high-stakes loan decisions. [EQ_26: squared error average].
+
+Root Mean Squared Error, the square root of MSE, provides error magnitude in original units, aiding interpretation in risk assessment. It balances sensitivity to outliers in financial predictions. [EQ_27: error magnitude transformation].
+
+R-squared indicates the proportion of variance explained by the model, showing its fit for loan risk data. It is crucial for gauging predictive power. [EQ_28: variance explanation ratio].
+
+Explained Variance assesses how well the model accounts for data variation, critical for reliable financial outcomes. [EQ_29: variation capture measure].
+
+Classification metrics like Accuracy, Precision, Recall, F1-Score, and ROC-AUC evaluate binary loan approval decisions derived from risk scores, ensuring balanced performance assessment. [EQ_30: classification performance measures].
+
+#### 11. Model Comparison Analysis
+
+Comparing model performance across multiple dimensions is essential in financial risk prediction. This step evaluates the strengths and weaknesses of each approach to understand their suitability for loan approval tasks. It provides a clear picture of how different architectures handle continuous risk scores and derived binary decisions.
+
+Visual tools such as line charts for error metrics and bar charts for variance and classification scores were used to assess outcomes. The process systematically compares error measures, explanatory power, and decision accuracy across all models. [EQ_31: comparative performance metric aggregation]. As noted by Gupta and Sharma (2026), such comparisons are key to selecting the most effective method for financial applications. This analysis ensures a thorough understanding of model capabilities in the context of risk assessment.
+
+#### 12. Language Model Integration for Report Generation
+
+Integrating an advanced language model enhances the interpretability of financial risk predictions. The chosen model, GPT-4o-mini from OpenAI, was selected for its ability to generate structured and formal underwriting reports. This integration is critical for translating complex risk scores into human-readable insights, supporting decision-making in loan approval processes.
+
+The language model operates through an API, receiving structured prompts based on risk scores and business rules. It produces detailed reports covering risk interpretation and financial analysis. This step bridges the gap between technical outputs and practical communication. According to Golec and AlabdulJalil (2025), such tools improve transparency in credit risk evaluation. The integration adds value by providing clear explanations for stakeholders, ensuring decisions are well-informed and accessible.
+
+#### 13. Web Application Framework for Risk Assessment
+
+A web-based platform using Streamlit was developed to enable real-time financial risk assessment. This framework was chosen for its ease of use and interactive capabilities, allowing seamless deployment of predictive models. It supports end-users in inputting financial data and receiving immediate risk evaluations, making it practical for loan approval scenarios.
+
+The application accepts user inputs for key financial indicators, processes them through saved models, and applies business rules for final decisions. Outputs include risk scores and detailed reports generated via an external language model API. As highlighted by Nallakaruppan et al. (2024), interactive platforms improve accessibility of complex models in financial contexts. This tool ensures that risk assessment is user-friendly and directly applicable to decision-making processes.
+
+#### 14. Testing of Application Scenarios
+
+Testing the web application across varied applicant profiles ensures its reliability in financial risk prediction. This step evaluates how the system handles diverse inputs, reflecting real-world loan approval challenges. It confirms that the integration of models and business rules functions as intended under different conditions.
+
+Three test cases were designed to cover high-risk, borderline, and low-risk scenarios. Each case assessed the risk score output, model decision, and final governance outcome. [EQ_32: test case evaluation criteria]. According to Ben Jebli and Zoghlami (2025), thorough testing is essential for validating decision systems in credit risk contexts. This process verifies the application’s consistency and accuracy in delivering risk assessments and decisions.
+
+#### 15. Professional, Legal, and Ethical Considerations
+
+Developing a system for financial risk prediction requires careful attention to professional, legal, and ethical aspects. Ensuring that the models and application adhere to industry standards is vital for credibility. Data handling must respect privacy norms even with synthetic datasets, maintaining trust in the research process. Bias in model predictions can lead to unfair outcomes, so steps were taken to monitor and mitigate such risks throughout development.
+
+Legally, the deployment of predictive tools in financial decisions must comply with regulations concerning transparency and accountability. Ethically, the system should avoid perpetuating discrimination through imbalanced data or flawed algorithms. The integration of explanatory reports aims to provide clarity to users, ensuring decisions are not opaque. Balancing technical precision with fairness remains a core focus, as the impact of loan approvals affects individuals’ lives significantly. This commitment to ethical practice underpins the entire research and application framework.
+
