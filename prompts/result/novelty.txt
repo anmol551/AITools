@@ -1,0 +1,9 @@
+Read the provided content and identify the novel contributions of this research.
+Write a clear and concise highlight of key innovations and unique aspects that
+distinguish this study. Do not add figure placeholders in this section.
+
+{common}
+    10. Strictly approximately {wc} words.
+
+Use novelty from:
+{novelty}
