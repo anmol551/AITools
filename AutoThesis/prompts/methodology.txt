@@ -1,0 +1,204 @@
+{pp}
+
+Generate a methodology section of my research report.
+
+CRITICAL GLOBAL CONSTRAINT: The total combined word count of ALL generated subsections MUST NOT EXCEED 1500 words. Be concise and strictly adhere to this upper limit.
+
+══════════════════════════════════════════════════════════
+PIPELINE CONTENT (read carefully before generating):
+{pipeline}
+══════════════════════════════════════════════════════════
+
+SECTION GENERATION RULES:
+1. Read the pipeline content above carefully.
+2. Generate the FIXED subsections listed below (always present).
+3. Then identify ALL additional components present in the pipeline
+   (e.g., Feature Selection, Feature Engineering, Class Balancing,
+   Hyperparameter Tuning, LLM Integration, Web Application, XAI, etc.)
+   and generate a dedicated subsection for EACH one found.
+4. Place subsections in pipeline order:
+   - Components that happen BEFORE model building go between
+     Data Preprocessing and Model Building.
+   - Components that happen AFTER model building go between
+     Model Performance Evaluation Metrics and Ethics.
+5. Do NOT skip any pipeline component — if it is in the pipeline,
+   it must have its own subsection.
+6. Number all subsections sequentially.
+7. Do NOT output any Markdown heading symbols (#, ##, ###, etc.).
+   Write all subsection headings as plain text only.
+
+══════════════════════════════════════════════════════════
+EQUATION PLACEHOLDERS RULE — READ CAREFULLY:
+Only insert an equation placeholder [EQ_N: description] where a genuine
+mathematical formula or expression is required to explain the concept.
+The following types of steps do NOT get equation placeholders:
+    - Column removal or dropping features
+    - Train/test split ratios
+    - Any technique that was tried but abandoned (e.g. SMOTE if not used)
+    - Application testing steps or evaluation criteria descriptions
+    - General data loading or inspection steps
+Valid uses: model loss functions, activation functions, metric formulas
+(MAE, MSE, R2, Accuracy, Precision, Recall, F1, ROC-AUC),
+feature engineering expressions, normalisation/scaling transformations,
+attention or sparsity formulas, convolution operations.
+N increments globally across the entire methodology. Never reset.
+
+Limit: In this section maximum 5 equations will be there.
+══════════════════════════════════════════════════════════
+
+── FIXED SUBSECTION 1 : Research Design (~{wc_rd} words) ──────────────────
+Change heading to match project topic.
+    1. Describe the full research design pipeline without results.
+       Start from literature survey or data collection, cover ALL stages
+       in the pipeline, and end at web app testing if present.
+    2. Must be technical — mention all methods, techniques, model names,
+       web app name, and LLM if present.
+    3. Do not mention the best-performing model name.
+    4. Avoid function names.
+    5. Write in 2 paragraphs. No citations.
+    6. Strictly approximately {wc_rd} words.
+
+── PIPELINE DIAGRAM PLACEHOLDER ───────────────────────────────────────
+Immediately after the Research Design subsection, insert this exact block:
+
+[Figure 3.1: Research pipeline diagram]
+[Caption]Figure 3.1 — End-to-end research pipeline from data collection through to web application deployment.
+[Description]This diagram illustrates each stage of the research pipeline in sequence, showing the flow from data collection and preprocessing through model training, evaluation, and final deployment via the web application.
+Above is the sample so starting should vary as per the chart.
+
+── FIXED SUBSECTION 2 : Dataset Description (~{wc_dd} words) ──────────────
+Change heading to match project topic.
+    1. Describe the dataset used — source, author if present, shape.
+    2. Explain why it was chosen and its characteristics.
+    3. File formats only if present (e.g., .wav, .jpg).
+    4. Do not use exact feature names — use a summary table instead.
+    5. Mention the data source link. Example: Source: Link
+    6. No citations.
+    7. Structure: a) shape/size/physical characteristics,
+                   b) why chosen,
+                   c) data ethics — 2-3 paragraphs,
+       then a table or bullets for key data representations.
+    8. Strictly approximately {wc_dd} words.
+
+── FIXED SUBSECTION 3 : Data Preprocessing ────────────────────────────
+Change heading to match project topic.
+    1. Begin with one introductory sentence.
+    2. For EACH preprocessing technique, create a dedicated subheading (plain text, no # symbols).
+    3. Under each subheading (~{wc_pre} words, 2 paragraphs):
+        - Definition, reason for selection, how it improves quality,
+          equation placeholder where applicable (follow EQUATION PLACEHOLDERS RULE-optional),
+          and one in-text citation.
+    4. In-text citations embedded in sentences.
+       Example: "According to Sharif et al. (2020), …"
+    5. No summary at the end. Cover every technique.
+    6. Match citations from the citation file. Do not use paper titles.
+
+── DYNAMIC SUBSECTIONS (pre-model) ────────────────────────────────────
+For each pipeline stage that occurs BEFORE model training
+(e.g., Feature Selection, Feature Engineering, Class Balancing,
+Hyperparameter Tuning, or any other component found in the pipeline):
+
+Generate a dedicated subsection (~{wc_dyn} words, 2 paragraphs):
+    - Paragraph 1: Definition and specific reason for use in this research.
+    - Paragraph 2: Key steps, parameters, tools, equation placeholders
+      (follow EQUATION PLACEHOLDERS RULE strictly-optional), and one in-text citation.
+    - Do not use paper titles in citations.
+
+── FIXED SUBSECTION : Model Building ──────────────────────────────────
+Change heading to match project topic.
+    1. Begin with one introductory sentence.
+    2. For EVERY model used, create a dedicated subheading (plain text) (~{wc_mod} words, 2 paragraphs):
+    
+── MODEL ARCHITECTURE FIGURE RULE ──────────────────────────────────────
+For the two most important or primary models discussed, provide EXACTLY 
+one architecture placeholder block each (2 total across the section).
+Each block must follow this exact format, placed after the model paragraphs:
+
+new line
+[Figure 3.X: Model Name Architecture Diagram]
+[Caption]Figure 3.X — One line caption
+[Description]One paragraph of 60-80 words explaining what the figure
+          reveals, key values, patterns, and conclusions
+────────────────────────────────────────────────────────────────────────
+
+        - Paragraph 1: Clear definition and specific
+          justification for why this model was chosen for THIS research.
+          Do not give generic reasons.
+        - Paragraph 2: Working principles, parameters,
+          equation placeholders (follow EQUATION PLACEHOLDERS RULE- optional),
+          and at least one in-text citation.
+    3. For neural network architectures (CNN, TabNet, etc.), ALSO create
+       a dedicated subheading (plain text) for EACH layer or block present, including:
+       Conv1D, BatchNormalisation, Dense, Dropout, Flatten,
+       Attention Mechanism, and any other named layer.
+       Each layer subheading MUST have:
+        - Approximately {wc_mod_lay} words minimum in EXACTLY 2 paragraphs.
+        - Paragraph 1: Definition and specific role in THIS model's architecture.
+        - Paragraph 2: Internal workings, parameter values,
+          and one equation placeholder (only if a genuine formula applies).
+        - Do NOT write one-line descriptions — full 2-paragraph
+          treatment is required for every layer regardless of simplicity.
+    4. No implementation details, function names, or results.
+    5. No summaries.
+    
+
+── FIXED SUBSECTION : Model Performance Evaluation Metrics (~{wc_eval} words)
+    1. One-line introduction.
+    2. Define each evaluation metric used (40-50 words each) mandatory.
+    3. [Optional]Include one equation placeholder per metric formula (MAE, MSE, RMSE, R2, Accuracy, Precision, Recall, F1, ROC-AUC — only those actually used); not mandatory as the count in this entire section is 5 equations. So do check before writing.
+    4. Discuss metrics in context of the research topic.
+    5. No citations. Strictly approximately {wc_eval} words.
+
+── DYNAMIC SUBSECTIONS (post-model) ───────────────────────────────────
+For each pipeline stage that occurs AFTER model training
+(e.g., LLM Integration, Web Application, XAI Framework, or any other
+component found in the pipeline):
+
+Generate a dedicated subsection with the following requirements:
+
+LLM Integration (~{wc_llm} words, 2 paragraphs):
+    - What LLM was integrated and why it was chosen.
+    - Its role in the pipeline, API/interface used, prompt design.
+    - Benefits for explainability and decision support.
+    - Citations where relevant from the citation file.
+
+Web Application Framework (~{wc_web} words, 2 paragraphs):
+    - Definition of the framework and reason for selecting it.
+    - Key benefits: deployment ease, interactivity, user-friendliness.
+    - What the application does — inputs, processing, outputs.
+    - Citations from the citation file.
+
+XAI Framework (~{wc_xai} words, 2 paragraphs):
+    - Definition and reason for selecting the XAI method.
+    - Citations from the citation file.
+    - Equation placeholders where formulas appear (follow EQUATION PLACEHOLDERS RULE).
+
+Any other post-model component: ~{wc_dyn} words, 2 paragraphs,
+definition + justification + citations if available.
+
+── FIXED LAST SUBSECTION : Professional, Legal, and Ethical Considerations (~{wc_eth} words)
+    1. Write professional, legal, and ethical considerations specific to this data.
+    2. For financial machine learning systems, address ALL of the following where applicable (should be very much related to the data used):
+         - Data privacy obligations under GDPR and relevant UK financial data regulations.
+         - Compliance requirements under the Financial Conduct Authority (FCA) for algorithmic decision systems.
+         - Algorithmic fairness and anti-discrimination obligations under the Equal Credit Opportunity Act or equivalent UK legislation.
+         - Risk of bias in income-based, demographic, or credit-history features.
+         - Transparency and explainability obligations for automated financial decisions.
+         - Model accountability and audit trails for regulatory review.
+         - Developer responsibility when deploying predictive systems affecting individuals' access to credit.
+    3. One or two paragraphs only. No citations.
+    4. Strictly approximately {wc_eth} words.
+
+══════════════════════════════════════════════════════════
+IMPORTANT FINAL CHECKS before finishing:
+- Confirm EVERY pipeline stage has a corresponding subsection.
+- Confirm LLM Integration is present if LLM appears in the pipeline.
+- Confirm Web Application is present if a web app appears in the pipeline.
+- Confirm no section is missing, merged, or out of order.
+- Confirm [Figure 3.1] pipeline diagram placeholder is present after Research Design.
+- Confirm NO Markdown heading symbols (#, ##, etc.) appear anywhere.
+- Use commas only when necessary.
+══════════════════════════════════════════════════════════
+
+Use code summary, web app summary, and citations from:
+{a} {b} {c} {d}

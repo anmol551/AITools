@@ -1,0 +1,18 @@
+CONCLUSION AND FUTURE WORK
+------------------------
+1. CONCLUSION
+----------------------------------------
+The research pipeline processes a synthetic loan dataset comprising 20000 records to predict financial risk through two linked tasks. It begins with data exploration and categorical encoding followed by feature selection using Recursive Feature Elimination with a Random Forest estimator. Domain-specific feature engineering adds six indicators such as Income Stability Ratio and Debt Stress Index. After standard scaling models including ElasticNet a 1D Convolutional Neural Network and TabNet are trained on an 80/20 split. TabNet delivers superior outcomes with MAE 1.8953 R² 0.8839 accuracy 89.1% and ROC-AUC 0.9598 across regression and classification metrics.
+
+Key novelty arises from the integrated approach where a single TabNet regressor predicts continuous risk scores and applies a median threshold for binary loan approval decisions. This design uses TabNet's attention mechanism with entmax activation and sequential steps to enhance feature interpretability while incorporating ghost batch normalisation for better data handling. Engineered features encode financial domain knowledge directly reducing model complexity.
+
+Compared to earlier methods that use separate models for regression and classification this framework achieves higher efficiency by maintaining output consistency and adding a governance layer that overrides predictions based on policy rules such as rejecting scores above 50.
+
+The web application component employs Streamlit to deploy the TabNet model. It processes user inputs through live feature engineering generates risk scores and integrates GPT-4o-mini to produce detailed underwriting reports. These reports cover risk interpretation financial strengths and executive summaries transforming model outputs into actionable insights. This setup ensures seamless decision support in financial contexts.
+
+2. FUTURE WORK
+----------------------------------------
+Future research could examine alternative machine learning models such as gradient boosting or long short-term memory networks to improve prediction accuracy beyond the current approaches. Incorporating external datasets like economic indicators or real-time financial trends might enhance model performance by providing more comprehensive inputs for loan approval decisions. Refining feature selection through methods that emphasise interpretability such as tree-based importance measures could help clarify how variables like income and debt ratios influence outcomes.
+
+Researchers should investigate how varying preprocessing steps such as different scaling techniques affect model results given the observed data distributions in the analysis. Extending applications to practical settings like bank lending systems would test model effectiveness in live environments. Addressing ethical concerns including bias in predictions based on demographic factors remains essential to promote fair lending practices across diverse applicant groups. This direction could involve developing algorithms that balance accuracy with equity in decision-making processes. Such efforts would advance the field by building on existing findings from the dataset exploration. Efforts to validate models in broader contexts could yield insights into general trends in financial risk assessment.
+
