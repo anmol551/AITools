@@ -1,1 +1,0 @@
-# AutoThesis generators package
